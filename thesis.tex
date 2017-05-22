@@ -52,15 +52,15 @@ sphere in the liquid crystal.
 %------------------------------------------------------------------------------%
 
 \section*{Introduction}
-Due to being a uniaxial fluid, Liquid crystals have a wide variety of 
-behavior distinct from that of an isotropic fluid whose molecules have ordering.
-Formation of defects and the resulting effects on the transport properties of 
-liquid crystals allow for precise control of the flow of particles suspended in
-the liquid crystal itself. In this study, the equilibrium configuration of a
-system where a sphere is immersed in a liquid crystal is examined in order to 
-gain insight on the behavior of the system in the dynamic situation. Systems 
-where particles are suspended in a liquid crystal are called inverse nematic 
-emulsions. 
+Due to being a uniaxial fluid, liquid crystals have a wide variety of 
+behavior distinct from that of an isotropic fluid whose molecules do not have
+ordering. Formation of defects and the resulting effects on the transport 
+properties of liquid crystals allow for precise control of the flow of particles
+suspended in the liquid crystal itself. In this study, the equilibrium
+configuration of a system where a sphere is immersed in a liquid crystal is
+examined in order to gain insight on the behavior of the system in the dynamic
+situation. Systems where particles are suspended in a liquid crystal are called
+nematic suspensions. 
 
 Due to the anisotropic (directionally dependent) properties of liquid crystals, 
 the immersed particles exhibit particularly interesting transport properties 
@@ -70,11 +70,13 @@ perpendicularly to the particles. Due to imposed boundary conditions, defects
 form inside of the liquid crystal itself. These induced defects in the liquid 
 crystal medium govern the behavior of suspended particles by distorting the 
 orientations of the molecules and, as a result, increasing its resistance to
-flow. In theory, there two types of defects may form after a sphere has been 
+flow. In theory, there are two types of defects may form after a sphere has been 
 immersed in the liquid crystal. These are shown in Figure 
 \ref{fig:defect-config}. The first is a line defect that circles the sphere, 
 and the second is a point defect that forms close to the sphere. In experiment, 
-the dipole configuration with two point defects is observed \cite{lubensky98}.
+the dipole configuration with two point defects is observed \cite{lubensky98}. 
+For systems where sphere is small relative to the length of the molecules, the
+line defect is observed. For large spheres, the point defect is observed.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.7\textwidth]{defect-config.png}
@@ -140,7 +142,7 @@ order and also order in the positions of the center of masses of the particles
 
 In the nematic phase, the ideal or most energetically favorable configuration is
  one where all of the molecules are perfectly aligned with each other (although 
-not necessarily positionally correlated). In practice, this configuration is 
+not positionally correlated). In practice, this configuration is 
 never realized and there exists small fluctuations in the orientation of the 
 molecules \cite{degennes95}.
 
@@ -148,11 +150,11 @@ molecules \cite{degennes95}.
 Additionally, defects in liquid crystals allow for the control of particles 
 transport in the liquid crystal itself. Within ordered materials (materials 
 where we can assign an order parameter at each point in space), there is always 
-the possibility of defects forming. Defects during phase transitions, through 
-the introduction of colloidal molecules, and external forces among other things.
-Defects are areas inside materials where the configurations of the molecules
-change drastically. Furthermore these defects, cannot be removed from the 
-material by a simple transformation \cite{mermin79}. Examples of defects in 
+the possibility of defects forming. Defects form during phase transitions,
+through the introduction of colloidal molecules, and external forces among other 
+things. Defects are areas inside materials where the configurations of the 
+molecules change drastically. Furthermore these defects, cannot be removed from 
+the material by a simple transformation \cite{mermin79}. Examples of defects in 
 liquid crystals are seen in Figure \ref{fig:defects}.
 	\begin{figure}[H]
 		\centering
@@ -191,7 +193,7 @@ effects on the orientation of molecules far away from it. Since the orientation
 of the molecules relative to the flow affects the liquid crystals viscosity 
 these defects have a large impact on the transport properties.
 
-\subsection*{Inverse nematic emulsions}
+\subsection*{Nematic suspensions}
 When a sphere is immersed in the liquid crystal, the molecules will anchor 
 perpendicular to the sphere. Calculating the integral in 
 \ref{topological-charge} by taking the integral along a closed circuit 
@@ -220,28 +222,30 @@ be used in the case of liquid crystals due to the axial symmetry of the
 molecules. It is not possible to calculate an average orientation because the 
 addition of the orientation of two molecules in the "opposite" direction would 
 equal zero. Thus, the local average orientation would cancel to zero
-everywhere in the liquid crystal. It is necessary to employ the use of a tensor 
-order parameter. 
+everywhere in the liquid crystal. It is necessary to use a tensor order 
+parameter. 
 
 For a small but still macroscopic volume, the Q-tensor is
 	\begin{equation} \label{q-tensor}
 		Q = \frac{1}{N} \sum_{i}^{N} 
-		(u_{\alpha}^{(i)} u_{\beta}^{(i)} - \frac{1}{3}\delta_{\alpha\beta})
+		(e_{\alpha}^{(i)} e_{\beta}^{(i)} - \frac{1}{3}\delta_{\alpha\beta})
 		= \frac{1}{N} \sum_{i}^{N}
 		\begin{bmatrix}
-			u_x^{(i)}u_x^{(i)} - \frac{1}{3} 
-			& u_x^{(i)}u_y^{(i)} 
-			& u_x^{(i)}u_z^{(i)} \\
+			e_x^{(i)}e_x^{(i)} - \frac{1}{3} 
+			& e_x^{(i)}e_y^{(i)} 
+			& e_x^{(i)}e_z^{(i)} \\
 
-			u_y^{(i)}u_x^{(i)} 
-			& u_y^{(i)}u_y^{(i)} - \frac{1}{3} 
-			& u_y^{(i)}u_z^{(i)} \\
+			e_y^{(i)}e_x^{(i)} 
+			& e_y^{(i)}e_y^{(i)} - \frac{1}{3} 
+			& e_y^{(i)}e_z^{(i)} \\
 
-			u_z^{(i)}u_x^{(i)} 
-			& u_z^{(i)}u_y^{(i)} 
-			& u_z^{(i)}u_z^{(i)} - \frac{1}{3}
+			e_z^{(i)}e_x^{(i)} 
+			& e_z^{(i)}e_y^{(i)} 
+			& e_z^{(i)}e_z^{(i)} - \frac{1}{3}
 		\end{bmatrix}
 	\end{equation}
+$e^{(i)}$ is the orientation of a molecule in the volume being used to calculate
+the tensor. 
 
 The tensor order parameter is symmetric and traceless by construction. The 
 result is that the diagonalized tensor has a specific form:
@@ -350,12 +354,13 @@ integration, but these errors have not been proven to effect the validity of the
 results obtained from molecular dynamics simulations. Finally a large time step
 allows for more efficiency by allowing the system to have more time to evolve 
 (in the simulation) within the same amount of real time that simulation is run
-\cite{frenke01}.
+\cite{frenkel01}.
 
 \subsection*{The Gay-Berne potential}
 The Gay-Berne potential is one of the most widely used potentials for molecular 
 dynamics simulations of liquid crystals. As such, it is the one used to study a
-liquid crystal with an immersed sphere. The Gay-Berne potential is
+liquid crystal with an immersed sphere. The Gay-Berne potential is given in
+\cite{luckhurst06} as
 	\begin{equation} \label{gay-berne}
 		V^{GB}(\mathbf{e}_i,\mathbf{e}_j,\mathbf{r}_{ij})
 			= 4\epsilon (\mathbf{e}_i,\mathbf{e}_j,\mathbf{\hat{r}}_{ij}) 
@@ -454,7 +459,7 @@ end-to-end well depth respectively.
 		\qquad (\kappa' = \epsilon_s / \epsilon_e)
 	\end{equation}
 $\mu$ and $\nu$, as seen in (\ref{orientation-function}), serve as parameters 
-that further specify the shape of the potential \cite{luckhurst06}. 
+that further specify the shape of the potential. 
 
 The anisotropy can be seen in of the Gay-Berne potential can be seen in Figure 
 \ref{fig:gb} below which shows the shape of the potential for four different 
@@ -473,9 +478,9 @@ crystal molecules as ellipsoidal particles rather having to specify the actual
 molecular structure atom-by-atom. Despite this simplification, the rich behavior
 of liquid crystals is still observable in the molecular dynamics simulation.
 
-\subsection*{Sphere model potential}
+\subsection*{Suspended sphere model potential}
 A model similar to the pair potentials is used to model the interaction of the
-liquid crystal molecules with a sphere. It reads
+liquid crystal molecules with a sphere. From \cite{lubensky98}, it reads
 	\begin{equation} \label{sphere-pot}
 		U_{sphere} (\hat{e}, \hat{r}) 
 		= 4\epsilon_0 \left(\frac{1}{R(\hat{e}, \hat{r})}\right)^{18}
@@ -528,7 +533,7 @@ $\sigma_0^r$ is given by
 		\sigma_0^r 
 		= \frac{1}{\sqrt{2}}\left( \sigma_s^2 + 4R_{sphere}^2 \right)^2
 	\end{equation}
-	$R_{sphere}$ is the radius of the sphere \cite{lubensky98}. 
+	$R_{sphere}$ is the radius of the sphere. 
 
 \subsection*{Velocity Verlet Method}
 Once the forces and torques on each particle due to it's neighbors have been
@@ -537,13 +542,14 @@ to use the Velocity Verlet Method to do this. The Velocity Verlet method is a
 second order method which is especially convenient because it allows us to
 calculate the trajectories of the molecules using the positions and velocities
 (versus other methods which use solely the position). To integrate the
-translational motion. We first start by calculating the velocity of the
-molecules at a half time step after the current time. 
+translational motion. We start by calculating the velocity, $v_i$, of the
+molecules at a half time step after the current time using its acceleration,
+$a_i$, calculated at the current time step . 
 	\begin{equation} \label{vv-v1}
 		v_i(t+\frac{\Delta t}{2}) 
 		= v_i(t) + a_i(t)\frac{\Delta t}{2}
 	\end{equation}
-The position at the next time step is calculated.
+The position, $x_i$, at the next time step is calculated.
 	\begin{equation} \label{vv-x}
 		x_i(t+\Delta t) 
 		= x_i(t) + v_i(t+\frac{\Delta t}{2})\Delta t
@@ -569,7 +575,8 @@ Verlet method itself does not restrict calculated quantities (position,
 velocity, orientation, angular velocity) to unit length, and Lagrange 
 multipliers must be used to incorporate the conditions that the orientations
 must be of unit length and perpendicular to the angular velocities into the 
-equations of motion \cite{allen87}. The constraint on the length can be written as follows:
+equations of motion \cite{allen87}. The constraint on the length can be written 
+as follows:
 	\begin{equation} \label{unit-length}
 		e_i(t+\Delta t)  \cdot e_i(t+\Delta t) = 1
 	\end{equation}
@@ -580,7 +587,8 @@ where for calculating the Lagrange multiplier we let
 		+ u_i(t + \frac{\Delta t}{2})\Delta t 
 		+ \lambda e_i(t) \Delta t
 	\end{equation}
-The resulting Lagrange multiplier is 
+$u_i$ is the angular velocity of the molecule. The resulting Lagrange multiplier 
+is 
 	\begin{equation} \label{lagrange-1}
 		\begin{align}
 			\lambda 
@@ -609,7 +617,8 @@ where
 		+ \alpha_i(t+\Delta t)\frac{\Delta t}{2} 
 		+ \tilde{\lambda} e_i(t+\Delta t)\frac{\Delta t}{2}
 	\end{equation}
-The second Lagrange multiplier is
+$\alpha_i$ is the angular acceleration of the molecule. The second Lagrange
+multiplier is
 	\begin{equation} \label{lagrange-2}
 		\begin{align}
 			\tilde{\lambda} 
@@ -622,7 +631,7 @@ After finding the Lagrange multipliers, integrating the equations of motion for
 the rotational motion is analogous to the translational motion.
 
 Additionally in order to keep the temperature constant in the simulation, a
-thermometer from \cite{ilnytskyi02} is used to adjust the velocities. This keeps 
+thermostat from \cite{ilnytskyi02} is used to adjust the velocities. This keeps 
 the fluctuations of the local average orientations to a minimum.
 
 \subsection*{Initialization}
@@ -814,7 +823,7 @@ estimate the size of the defect ring.
 
 Additionally, a line defect around the sphere is being observed instead of a
 point defect as seen in experiment. This is likely do to the fact that the
-sphere in the simulation is not large enough \cite{lubensky97}
+sphere in the simulation is not large enough \cite{lubensky98}
 
 \section*{Conclusion}
 Using the Gay-Berne potential, a liquid crystal in the nematic phase has been
@@ -830,10 +839,11 @@ simulation time.
 \section*{Acknowledgements}
 Foremost, I would like to thank Professor Jorge Vi\~nals for the guidance he has
 provided while constructing the simulation and during way too many hours of
-debugging. Additionally, I would like to thank Professor Paul Crowell for
-organizing the physics honors seminar Finally, the University of Minnesota 
-Honors Department deserves recognition for giving undergraduates the opportunity
-to perform research for and write theses such as this one.
+debugging. Thank you to Professor Paul Crowell for organizing the physics honors
+seminar where we were able to showcase our work during presentations. Finally,
+the University of Minnesota Honors Department deserves recognition for giving 
+undergraduates the opportunity to perform research for and write theses such as 
+this one.
 
 %------------------------------------------------------------------------------%
 %--------------------------------  References  --------------------------------%
