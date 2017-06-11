@@ -23,7 +23,7 @@
 %-------------------------------  Title page  ---------------------------------%
 %------------------------------------------------------------------------------%
 
-\title{Computational studies of defect mediated transport}
+\title{Molecular dynamics study of a nematic suspension}
 \author{Bryan Chem}
 \affiliation{University of Minnesota Twin Cities, School of Physics and 
 	Astronomy, Minneapolis, MN 55455}
@@ -75,7 +75,7 @@ immersed in the liquid crystal. These are shown in Figure
 \ref{fig:defect-config}. The first is a line defect that circles the sphere, 
 and the second is a point defect that forms close to the sphere. In experiment, 
 the dipole configuration with two point defects is observed \cite{lubensky98}. 
-For systems where sphere is small relative to the length of the molecules, the
+For systems where the sphere is small relative to the length of the molecules, the
 line defect is observed. For large spheres, the point defect is observed.
 	\begin{figure}[H]
 		\centering
@@ -89,10 +89,8 @@ The equilibrium configuration of the sphere and defect are simulated using a
 technique called molecular dynamics. The distance between the immersed sphere 
 and the corresponding defect in the equilibrium configuration will give 
 information about the ability of the sphere to flow in the liquid crystal. 
-Larger, more abrupt changes in the orientations of the molecules will increase 
-the resistance of the system to flow \cite{billeter00}. Thus, a smaller distance
-indicates that there will be more resistance to flow than if the sphere and
-defect were further away from each other.
+Larger, abrupt changes in the orientations of the molecules will increase 
+the resistance of the system to flow \cite{billeter00}.
 
 These systems are especially of interest because of their applications in flow 
 control. Immersed particles can be translated inside of the liquid crystal
@@ -280,7 +278,7 @@ indicates that there may be more than one preferred axis of alignment
 \subsection*{Biaxial coefficient}
 Additionally, using the tensor order parameter, it is possible to find defects 
 inside the liquid crystal using a defined coefficient -the biaxial coefficient. 
-The biaxial coefficient is
+The biaxial coefficient from \cite{tovkach17} is
 	\begin{equation} \label{biaxial}
 		\beta = \frac{(detQ)^2}{(TrQ^2)^3} - \frac{1}{54}
 	\end{equation}
@@ -332,12 +330,12 @@ Once the potential is known, the forces on an individual particle $i$ due to a
 particle $j$ can be calculated by taking the negative gradient of the potential 
 as shown below.
 	\begin{equation} \label{force}
-		\mathbf{f}_{ij}=-\nabla_{r_{ij}}V_{ij}
+		\vec{f}_{ij}=-\nabla_{\vec{r}_{ij}}V_{ij}
 	\end{equation}
 The torque, given an anisotropic potential, on a particle $i$ due to a particle 
 $j$ is given by,
 	\begin{equation} \label{torque}
-		\mathbf{\tau}_{ij}=-\mathbf{e_i}\times\nabla_{\mathbf{e}_{i}}V_{ij}
+		\vec{\tau}_{ij}=-\hat{e_i}\times\nabla_{\hat{e}_{i}}V_{ij}
 	\end{equation}
 $\mathbf{e}_{i}$ is the orientation of particle $i$. Thus, the total force and 
 total torque on a particle is the sum of all of forces and torques exerted by 
@@ -348,12 +346,11 @@ When choosing a method to numerically integrate Newton's equations of motion,
 some considerations to be taken are choosing a method that is time-reversible 
 and conserves the energy, the accuracy of the method, and the largest allowable 
 time step. The time reversibility and conservation of energy criteria are 
-necessary to ensure that the system behaves in a realistic manner. The accuracy 
-of the algorithm is less important. There will undoubtedly be small error in the 
-integration, but these errors have not been proven to effect the validity of the 
-results obtained from molecular dynamics simulations. Finally a large time step
-allows for more efficiency by allowing the system to have more time to evolve 
-(in the simulation) within the same amount of real time that simulation is run
+necessary to ensure that the system behaves in a realistic manner. There will
+undoubtedly be small errors in the integration, but they are not statistically
+significant as long as the energy is conserved. Finally a large time step allows
+for more efficiency by allowing the system to have more time to evolve (in the
+simulation) within the same amount of real time that simulation is run
 \cite{frenkel01}.
 
 \subsection*{The Gay-Berne potential}
@@ -362,8 +359,8 @@ dynamics simulations of liquid crystals. As such, it is the one used to study a
 liquid crystal with an immersed sphere. The Gay-Berne potential is given in
 \cite{luckhurst06} as
 	\begin{equation} \label{gay-berne}
-		V^{GB}(\mathbf{e}_i,\mathbf{e}_j,\mathbf{r}_{ij})
-			= 4\epsilon (\mathbf{e}_i,\mathbf{e}_j,\mathbf{\hat{r}}_{ij}) 
+		V^{GB}(\hat{e}_i,\hat{e}_j,\vec{r}_{ij})
+			= 4\epsilon (\hat{e}_i,\hat{e}_j,\hat{r}_{ij}) 
 			\left[
 				\left(\frac{1}{R(\hat{e_i},\hat{e_j},\vec{r_{ij}})}\right)^{12}
 				- 
@@ -373,7 +370,7 @@ liquid crystal with an immersed sphere. The Gay-Berne potential is given in
 where
 	\begin{equation} \label{distance-term}
 		R(\hat{e_i},\hat{e_j},\vec{r_{ij}}) = \frac{
-			r_{ij} - \sigma(\mathbf{e}_i,\mathbf{e}_j,\mathbf{\hat{r}}_{ij})
+			r_{ij} - \sigma(\hat{e}_i,\hat{e}_j,\hat{r}_{ij})
 			+ \sigma_s
 		}
 		{
@@ -381,29 +378,29 @@ where
 		}
 	\end{equation}
 $\sigma$ is the molecular shape parameter and $\epsilon$ is the well depth. 
-$\sigma$ and $\epsilon$ are functions of $\mathbf{e}_i$,  $\mathbf{e}_j$, and 
-$\mathbf{r}_{ij}$ the particle orientations and separation vector respectively. 
+$\sigma$ and $\epsilon$ are functions of $\hat{e}_i$, $\hat{e}_j$, and 
+$\vec{r}_{ij}$ the particle orientations and separation vector respectively. 
 The shape of the molecule is encoded in the shape parameter itself and shifts 
 the repulsive wall of the potential to match up with the geometry of the
 ellipsoidal molecules and is
 	\begin{equation} \label{distance-function}
-		\sigma(\mathbf{e}_i,\mathbf{e}_j,\mathbf{\hat{r}}_{ij})
+		\sigma(\hat{e}_i,\hat{e}_j,\hat{r}_{ij})
 		= \sigma_s \left\{
 			1 
 			- \frac{\chi}{2} \left[
 				\frac{
-					(\mathbf{e}_i \cdot \mathbf{\hat{r}}_{ij} 
-					+ \mathbf{e}_j \cdot \mathbf{\hat{r}}_{ij})^2
+					(\hat{e}_i \cdot \hat{r}_{ij} 
+					+ \hat{e}_j \cdot \hat{r}_{ij})^2
 				}
 				{
-					1 + \chi(\mathbf{e}_i\cdot\mathbf{e}_j)
+					1 + \chi(\hat{e}_i \cdot \hat{e}_j)
 				}
 				+\frac{
-					(\mathbf{e}_i \cdot \mathbf{\hat{r}}_{ij} 
-					- \mathbf{e}_j \cdot \mathbf{\hat{r}}_{ij})^2
+					(\hat{e}_i \cdot \hat{r}_{ij} 
+					- \hat{e}_j \cdot \hat{r}_{ij})^2
 				}
 				{
-					1 - \chi(\mathbf{e}_i \cdot \mathbf{e}_j)
+					1 - \chi(\hat{e}_i \cdot \hat{e}_j)
 				}
 		\right]\right\}^{-1/2}
 	\end{equation}
@@ -411,39 +408,39 @@ Additionally, the well depth function $\epsilon$ changes the depth of the well
 to reflect that the side-by-side configuration of molecules is energetically 
 preferred. It is 
 	\begin{equation} \label{orientation-function}
-		\epsilon(\mathbf{e}_i,\mathbf{e}_j,\mathbf{\hat{r}}_{ij}) 
+		\epsilon(\hat{e}_i,\hat{e}_j,\hat{r}_{ij}) 
 		= \epsilon_s
 			\left[	
-				\epsilon'(\mathbf{e}_i,\mathbf{e}_j,\mathbf{\hat{r}}_{ij})i
+				\epsilon'(\hat{e}_i,\hat{e}_j,\hat{r}_{ij})i
 			\right]^\mu
 			\left[
-				\epsilon''(\mathbf{e}_i,\mathbf{e}_j)
+				\epsilon''(\hat{e}_i,\hat{e}_j)
 			\right]^\nu
 	\end{equation}
 where
 	\begin{equation} \label{o-func1}
-		\epsilon'(\mathbf{e}_i,\mathbf{e}_j,\mathbf{\hat{r}}_{ij}) 
+		\epsilon'(\hat{e}_i,\hat{e}_j,\hat{r}_{ij}) 
 		= 1 - \frac{\chi'}{2}
 		\left[
 			\frac{
-				(\mathbf{e}_i \cdot \mathbf{\hat{r}}_{ij} 
-				+ \mathbf{e}_j \cdot \mathbf{\hat{r}}_{ij})^2
+				(\hat{e}_i \cdot \hat{r}_{ij} 
+				+ \hat{e}_j \cdot \hat{r}_{ij})^2
 			}
 			{
-				1+\chi'(\mathbf{e}_i \cdot \mathbf{e}_j)
+				1+\chi'(\hat{e}_i \cdot \hat{e}_j)
 			}
 			+ \frac{
-				(\mathbf{e}_i \cdot \mathbf{\hat{r}}_{ij} 
-				- \mathbf{e}_j \cdot \mathbf{\hat{r}}_{ij})^2
+				(\hat{e}_i \cdot \hat{r}_{ij} 
+				- \hat{e}_j \cdot \hat{r}_{ij})^2
 				}
 				{
-					1-\chi'(\mathbf{u}_i \cdot \mathbf{u}_j)
+					1-\chi'(\hat{u}_i \cdot \hat{u}_j)
 				}
 		\right]
 	\end{equation}
 	\begin{equation} \label{o-func2}	
-		\epsilon''(\mathbf{e}_i,\mathbf{e}_j) 
-		= \left[ 1 - \chi^2(\mathbf{e}_i \cdot \mathbf{e}_j)^2 \right]^{-1/2}	
+		\epsilon''(\hat{e}_i,\hat{e}_j) 
+		= \left[ 1 - \chi^2(\hat{e}_i \cdot \hat{e}_j)^2 \right]^{-1/2}	
 	\end{equation}
 $\chi$ is the shape anisotropy parameter and $\chi'$ is the well depth 
 anisotropy parameter. These are defined in terms of ratios of $\sigma_s$ 
@@ -502,15 +499,17 @@ where
 		}
 	\end{equation}
 Here $r$ is the distance from the center of the sphere to the center of the
-molecule.The positive term represents the hard repulsive force due to the
-molecules colliding with the sphere itself. To model the surface anchoring there
-is a similar term which gives a well like in the pair-potential. This attractive
-term has been modified with a dot product between the separation vector between
-the center of the sphere and the orientation of the molecules themselves. When
-the vectors are completely aligned (when a liquid crystal molecule is
-perpendicular to the surface of the sphere), the attractive force is at a
-maximum. When the molecules are tangential to the surface, there is no 
-attractive force.
+molecule. $W$ is the anchoring coefficient which controls the strength of the
+interations of the molecules with the surface of the sphere.
+
+The positive term represents the hard repulsive force due to the molecules 
+colliding with the sphere itself. To model the surface anchoring there is a 
+similar term which gives a well like in the pair-potential. This attractive term 
+has been modified with a dot product between the separation vector between the 
+center of the sphere and the orientation of the molecules themselves. When the 
+vectors are completely aligned (when a liquid crystal molecule is perpendicular 
+to the surface of the sphere), the attractive force is at a maximum. When the 
+molecules are tangential to the surface, there is no attractive force.
 
 The shape function describing the interaction of various configurations of the
 sphere with ellipsoidal molecules is
@@ -544,7 +543,7 @@ calculate the trajectories of the molecules using the positions and velocities
 (versus other methods which use solely the position). To integrate the
 translational motion. We start by calculating the velocity, $v_i$, of the
 molecules at a half time step after the current time using its acceleration,
-$a_i$, calculated at the current time step . 
+$a_i$, calculated at the current time step. 
 	\begin{equation} \label{vv-v1}
 		v_i(t+\frac{\Delta t}{2}) 
 		= v_i(t) + a_i(t)\frac{\Delta t}{2}
@@ -592,16 +591,16 @@ is
 	\begin{equation} \label{lagrange-1}
 		\begin{align}
 			\lambda 
-			& = -\left(\hat{e}(t) 
-				\cdot \vec{u}(t+\frac{1}{2}\Delta t)+\frac{1}{\Delta t} 
+			& = -\left(e_i(t) 
+				\cdot u_i(t+\frac{1}{2}\Delta t)+\frac{1}{\Delta t} 
 			\right)\\
 			& \pm \left[ 
-				\left( \hat{e}(t) \cdot \vec{u}(t+\frac{1}{2}\Delta t)
+				\left( e_i(t) \cdot u_i(t+\frac{1}{2}\Delta t)
 				+ \frac{1}{\Delta t}
 				\right)^2 
-				- \vec{u}(t+\frac{1}{2}\Delta t) 
-				\cdot \vec{u}(t+\frac{1}{2}\Delta t)
-				- \frac{2 \hat{e}(t) \cdot \vec{u}(t+\frac{1}{2}\Delta t)}
+				- u_i(t+\frac{1}{2}\Delta t) 
+				\cdot u_i(t+\frac{1}{2}\Delta t)
+				- \frac{2 e_i(t) \cdot u_i(t+\frac{1}{2}\Delta t)}
 				{\Delta t}
 			\right]
 		\end{align}
@@ -622,9 +621,9 @@ multiplier is
 	\begin{equation} \label{lagrange-2}
 		\begin{align}
 			\tilde{\lambda} 
-			= \frac{2}{\Delta t} \vec{u}(t + \frac{1}{2}\Delta t) 
-			\cdot \hat{e}(t+\Delta t) 
-			+ \vec{\alpha}(t + \Delta t) \cdot \hat{e} (t + \Delta t)
+			= \frac{2}{\Delta t} u_i(t + \frac{1}{2}\Delta t) 
+			\cdot e_i(t+\Delta t) 
+			+ \alpha_i(t + \Delta t) \cdot e_i (t + \Delta t)
 		\end{align}
 	\end{equation}
 After finding the Lagrange multipliers, integrating the equations of motion for
@@ -640,20 +639,21 @@ particles are not too densely packed. This can result in a large repulsive force
 causing particles to scatter off at high velocity producing errors in position 
 or energy calculations. A simple way of avoiding this situation, is to 
 initialize the positions of each particle such that they are arranged in a 
-periodic structure within the simulation box. The side lengths of the simulation
-box and the number of particles is dependent on the desired density of
-particles. After each particle is placed on a lattice site, the next step is to
-assign random velocities from a uniform distribution for each degree of freedom.
-At this point, the sum of the velocities and the sum of the squares of the
-velocities are calculated. Two adjustments need to be made before the
-initialization process is complete. First, the velocity of the system's center
-of mass is set to zero. The center of mass velocity is calculated by dividing
-the total velocities for each component by the number of particles. For each
-particle, the velocities in each direction are shifted by subtracting the center
-of mass velocity. This process prevents the system as a whole from shifting
-around. The second adjustment is to set the kinetic energy of the system. The
-average kinetic energy of a system can be related to the temperature by the 
-following equation:
+periodic structure within the simulation box. Additionally, the molecules are
+perfectly aligned along one axis to further mitigate the issue of overlapping. 
+The side lengths of the simulation box and the number of particles is dependent
+on the desired density of particles. After each particle is placed on a lattice
+site, the next step is to assign random velocities from a uniform distribution
+for each degree of freedom. At this point, the sum of the velocities and the sum
+of the squares of the velocities are calculated. Two adjustments need to be made
+before the initialization process is complete. First, the velocity of the
+system's center of mass is set to zero. The center of mass velocity is
+calculated by dividing the total velocities for each component by the number of
+particles. For each particle, the velocities in each direction are shifted by
+subtracting the center of mass velocity. This process prevents the system as a
+whole from shifting around. The second adjustment is to set the kinetic energy
+of the system. The average kinetic energy of a system can be related to the
+temperature by the following equation:
 	\begin{equation}
 		\langle \frac{1}{2}mv_i^2 \rangle=k_bT
 	\end{equation}
@@ -663,7 +663,8 @@ velocities for each degree of freedom.
 		f_{i,scaling}=\frac{k_bT}{\langle v_i^2 \rangle}
 	\end{equation}
 The velocity components for each particle are multiplied by the respective 
-scaling factors \cite{frenkel01}. 
+scaling factors \cite{frenkel01}. For a comprehensive list of all parameters
+used in the simulation see Table \ref{table:params}.
 
 \subsection*{Boundary conditions}
 Periodic boundary conditions are used in the simulation. This means that there 
@@ -706,13 +707,15 @@ relative to each other. It is
 		o(r) = \frac{1}{N(shell)}\sum S
 	\end{equation}
 where
-	\begin{equation}
-		S = \frac{3\cos^2(\theta)-1}{2}
+	\begin{equation}\label{sop}
+		S = \frac{3(\hat{e}_i \cdot \hat{e}_j)^2-1}{2}
 	\end{equation}
-In both the isotropic and nematic phase, it is expected that the particles are
-mostly aligned with its nearest neighbors. The difference being that in the
-nematic phase we expect to see the orientation correlation function never
-decaying to zero which indicates long range ordering in the liquid crystal 
+$S$ is the scalar order parameter (not to be confused with $s$ which is the
+topological charge). In both the isotropic and nematic phase, it is expected
+that the particles are mostly aligned with its nearest neighbors. The difference
+being that in the nematic phase we expect to see the orientation correlation
+function never decaying to zero which indicates long range ordering in the
+liquid crystal
 \cite{frenkel01}.
 		
 \section*{Simulation}
@@ -720,19 +723,52 @@ The simulation was performed with 4096 molecules with a density of 0.31 and
 temperature of 0.8. The simulation was performed with
 dimensionless units with $\sigma_s=1$ and $\epsilon_s=1$ and $m=1$ ($m$ is the
 mass of the particles. The rest of the quantities are scaled based of these
-three quantities \cite{frenkel01}.
+three quantities \cite{frenkel01}. Below is a complete list of parameters used 
+in the simulation.
+\begin{table}[H]
+\centering
+	\begin{tabular}{|c|c||c|}
+		\hline
+		Parameter & Value & Description \\
+		\hline \hline
+		$\sigma_s$ & 1 & Length of the short axis of liquid crystal molecules\\
+		$\epsilon_s$ & 1 & Well depth of $\vec{e_i}\cdot\vec{e_j}=1$
+		configuration \\
+		$kB$ & 1 & Boltzmann Constant \\
+		$m$ & 1 & Mass of the molecules \\
+		$I$ & 1 & Moment of inertia of molecules \\
+		$N$ & 4096 & Number of molecules \\
+		$L$ & 48.5 & Long length of rectangular simulation box \\
+		$SL$ & 16.5 & Short length of rectangular simulation box \\
+		$T$ & 0.8 & Temperature \\
+		$dt$ & 0.0015 & Length of time step \\
+		\hline
+		$\mu$ & 2 & Anisotropy parameters in the Gay-Berne potential \\
+		$\nu$ & 1 & \\
+		$\kappa$ & 3 & \\
+		$\kappa'$ & 5 & \\
+		\hline
+		$R_{sphere}$ & 3.0 & Radius of immersed sphere \\
+		$W$ & 35000 & Anchoring coefficient \\
+		\hline
+	\end{tabular}
+\caption{A list of parameters used in the simulation}
+\label{table:params}
+\end{table}
 
 For the first 25000 timesteps, system is equillibriated and allowed to form a
 nematic phase without the sphere model potential turned on. After this point, a
-space is carved out for the sphere by removing particles in a sphere with
-$R_{sphere}=3$. The sphere model terms are then turned on with a cutoff distance
+space is carved out for the sphere by removing particles in a sphere with radius
+$R_{sphere}$. The sphere model terms are then turned on with a cutoff distance
 of $3\sigma_s$. Interestingly enough, and expected, despite the sphere model
 acting only on particles in its direct vicinity, there are long range
 distortions of the director field. The system is allowed to equillibriate for
-75000 timesteps. Towards the end of the simulation the average of the Q-tensor
-is calculated which is used later to plot the director field and look at the
-biaxiality. Additionally, the pair and orientation correlation functions are
-calculated.
+75000 timesteps. Towards the end of the simulation, the simulation is divided
+into an 11$\times$11$\times$11 grid. The average of the Q-tensor is calculated
+over the last 50 timesteps in each of the divisions. This is used later to plot
+the director field and look at the biaxiality. Additionally, the pair and
+orientation correlation functions are averaged over the last 10 timesteps and 
+then calculated.
 
 \section*{Results}
 
@@ -740,8 +776,15 @@ calculated.
 Before adding the sphere to the simulation, it must be confirmed that there is
 actually a liquid crystal phase and, particularly, the nematic phase. That means
 that three properties must be observed. The first is that ordering increases as
-the temperature in the simulation decreases. Figure \ref{fig:phase} is a plot of
-the scalar order parameter for the liquid crystal at various temperatures.
+the temperature in the simulation decreases. $S$ is calculated using an
+equation similar to (\ref{sop}) except we let $e_j=\hat{x}$.
+	\begin{equation}\label{sopx}
+		S = \frac{3(\hat{e}_i \cdot \hat{x})^2-1}{2}
+	\end{equation}
+$S$ as defined in (\ref{sopx}) is calculted for each molecule in the
+simulation box with respect to the initial axis of alignment ($\hat{x}$) and
+then averaged over all molecules. Figure \ref{fig:phase} is a plot of the
+scalar order parameter for the liquid crystal at various temperatures.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\textwidth]{phase.png}
@@ -783,12 +826,11 @@ means that there is indeed long range ordering between the molecules.
 
 \subsection*{Director field plots and defects}
 In order to visualize the orientations of the molecules and find defects, the 
-director field is plotted. The simulation box is divided into a 11 by 11 by 11
-grid. In each bin, the Q-tensor is averaged for 50 timesteps. After the
-simulation is complete, the tensors are diagonalized giving the local average
-orientation and the biaxiality in the bin. Figure \ref{fig:biaxial-3d} is a 3D
-plot of the local preferred orientation of the molecules colored according to
-the amount of biaxiality in the bin.
+director field is plotted. After the simulation is complete and the averages of
+the Q-tensors are calculated, the tensors are diagonalized giving the local
+average orientation and the biaxiality in the bin. Figure \ref{fig:biaxial-3d}
+is a 3D plot of the local preferred orientation of the molecules colored
+according to the amount of biaxiality in the bin. 
 	\begin{figure}[H]
 		\includegraphics[width=\textwidth]{biaxial-3d.png}
 		\caption{A 3-D plot of the director field with the sphere inserted}
